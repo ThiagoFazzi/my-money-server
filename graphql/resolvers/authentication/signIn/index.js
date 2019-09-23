@@ -6,9 +6,7 @@ const User = mongoose.models.user;
 
 export const signIn = {
   signIn: async ({ email, password }) => {
-    console.log('entrei');
     const user = await User.findOne({ email: email });
-    console.log(user);
     if (!user) {
       return {
         error: 'User does not exist',
