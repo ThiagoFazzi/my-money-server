@@ -13,6 +13,17 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  createdDate: {
+    type: Date,
+    required: true,
+  },
+  updatedDate: {
+    type: Date,
+    required: false,
+  },
+  photo: {
+    type: String,
+  },
   createdAccount: [
     {
       type: Schema.Types.ObjectId,
