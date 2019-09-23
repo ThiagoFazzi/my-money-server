@@ -3,12 +3,20 @@ export const user = `
     _id: ID!
     email: String!
     userName: String
+    photo: String
+    createdDate: String
+    updatedDate: String
   }
 
   input UserInput {
     email: String!
     password: String!
     userName: String!
+  }
+
+  input UserProfileInput {
+    userName: String
+    photo: String
   }
 
   type AuthData {
