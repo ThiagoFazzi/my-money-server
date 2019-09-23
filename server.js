@@ -2,7 +2,6 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import isAuth from './middleware/is-auth';
 import { mongoose } from './mongoose';
 import { graphql } from './graphql';
 
@@ -11,8 +10,6 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-
-app.use(isAuth);
 
 app.use(
   '/graphql',

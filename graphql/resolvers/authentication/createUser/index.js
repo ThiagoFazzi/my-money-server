@@ -17,8 +17,6 @@ export const createUser = {
           email: args.userInput.email,
           userName: args.userInput.userName,
           password: hashedPassord,
-          createdDate: Date(),
-          updatedDate: Date(),
         });
         return user
           .save()
@@ -27,11 +25,7 @@ export const createUser = {
               ...result._doc,
               password: null,
               _id: result.id,
-              email: result.email,
               userName: result.userName,
-              photo: result.photo,
-              createdDate: result.createdDate,
-              updatedDate: result.updatedDate,
             };
           })
           .catch(err => {
