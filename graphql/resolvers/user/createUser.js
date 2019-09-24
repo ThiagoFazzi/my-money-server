@@ -1,16 +1,16 @@
-import bcrypt from 'bcryptjs';
-import { mongoose } from '../../../../mongoose';
+import bcrypt from 'bcryptjs'
+import { mongoose } from '../../../mongoose'
 
-const User = mongoose.models.user;
+const User = mongoose.models.user
 
 export const createUser = {
   createUser: args => {
     return User.findOne({ email: args.userInput.email })
       .then(user => {
         if (user) {
-          throw new Error('User exists already.');
+          throw new Error('User exists already.')
         }
-        return bcrypt.hash(args.userInput.password, 12);
+        return bcrypt.hash(args.userInput.password, 12)
       })
       .then(hashedPassord => {
         const user = new User({
@@ -18,8 +18,8 @@ export const createUser = {
           userName: args.userInput.userName,
           password: hashedPassord,
           createdDate: Date(),
-          updatedDate: Date(),
-        });
+          updatedDate: Date()
+        })
         return user
           .save()
           .then(result => {
@@ -31,15 +31,15 @@ export const createUser = {
               userName: result.userName,
               photo: result.photo,
               createdDate: result.createdDate,
-              updatedDate: result.updatedDate,
-            };
+              updatedDate: result.updatedDate
+            }
           })
           .catch(err => {
-            throw err;
-          });
+            throw err
+          })
       })
       .catch(err => {
-        throw err;
-      });
-  },
-};
+        throw err
+      })
+  }
+}

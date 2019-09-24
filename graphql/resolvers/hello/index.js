@@ -1,5 +1,5 @@
+import { hello } from './hello'
+
 export const hello = {
-  hello: () => {
-    return 'Hello world!';
-  },
-};
+  ...hello
+}

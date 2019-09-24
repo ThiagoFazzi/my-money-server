@@ -1,29 +1,27 @@
-import { mongoose } from '../../../../mongoose';
-import { isAuth } from '../../../../helpers/isAuth';
+import { mongoose } from '../../../mongoose'
+import { isAuth } from '../../../helpers/isAuth'
 
-const User = mongoose.models.user;
+const User = mongoose.models.user
 
 export const updateUser = {
   updateUser: async (args, req) => {
-    isAuth(req.isAuth);
-    console.log('update User');
+    isAuth(req.isAuth)
     const user = new User({
       userName: args.userProfileInput.userName,
       photo: args.userProfileInput.photo,
-      updatedDate: Date(),
-    });
-    console.log(user);
+      updatedDate: Date()
+    })
     const updatedUser = await User.findByIdAndUpdate(
       req.userId,
       {
         $set: {
           userName: user.userName,
           photo: user.photo,
-          updatedDate: user.updatedDate,
-        },
+          updatedDate: user.updatedDate
+        }
       },
       { new: true }
-    );
+    )
     return {
       ...updatedUser._doc,
       password: null,
@@ -32,7 +30,7 @@ export const updateUser = {
       userName: updatedUser.userName,
       photo: updatedUser.photo,
       createdDate: updatedUser.createdDate,
-      updatedDate: updatedUser.updatedDate,
-    };
-  },
-};
+      updatedDate: updatedUser.updatedDate
+    }
+  }
+}
