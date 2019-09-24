@@ -1,19 +1,17 @@
-import { mongoose } from '../../../../mongoose';
-import { isAuth } from '../../../../helpers/isAuth';
+import { mongoose } from '../../../../mongoose'
+import { isAuth } from '../../../../helpers/isAuth'
 
-const User = mongoose.models.user;
+const User = mongoose.models.user
 
 export const getUser = {
   getUser: async (args, req) => {
-    isAuth(req.isAuth);
-    console.log(args);
-    console.log(req.userId);
-    const user = await User.findById(req.userId);
+    isAuth(req.isAuth)
+    const user = await User.findById(req.userId)
     if (!user) {
       return {
         error: 'User not found',
-        data: null,
-      };
+        data: null
+      }
       //throw new Error('User does not exist');
     } else {
       return {
@@ -24,8 +22,8 @@ export const getUser = {
         userName: user.userName,
         photo: user.photo,
         createdDate: user.createdDate,
-        updatedDate: user.updatedDate,
-      };
+        updatedDate: user.updatedDate
+      }
     }
-  },
-};
+  }
+}
