@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { mongoose } from './mongoose';
 import { graphql } from './graphql';
-import isAuth from './src/middleware/is-auth'
+import isAuth from './middleware/is-auth'
 
 const PORT = process.env.PORT || 3000;
 
