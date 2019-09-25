@@ -3,4 +3,4 @@ export const rootQuery = `
     signIn(email: String!, password: String!): AuthData
     hello: String
   }
-`;
+`
