@@ -12,11 +12,13 @@ export const signIn = {
         error: 'User does not exist',
         data: null
       }
-      //throw new Error('User does not exist');
     }
     const isEqual = await bcrypt.compare(password, user.password)
     if (!isEqual) {
-      throw new Error('Login fail, try again')
+      return {
+        error: 'Login fail, try again',
+        data: null
+      }
     }
     const token = jwt.sign(
       { userId: user.id, email: user.email },

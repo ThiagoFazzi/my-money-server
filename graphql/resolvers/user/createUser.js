@@ -4,42 +4,49 @@ import { mongoose } from '../../../mongoose'
 const User = mongoose.models.user
 
 export const createUser = {
-  createUser: args => {
-    return User.findOne({ email: args.userInput.email })
-      .then(user => {
-        if (user) {
-          throw new Error('User exists already.')
+  createUser: async args => {
+    try {
+      const user = await User.findOne({ email: args.userInput.email })
+      if (user) {
+        return {
+          error: 'User exists already.',
+          data: null
         }
-        return bcrypt.hash(args.userInput.password, 12)
-      })
-      .then(hashedPassord => {
-        const user = new User({
-          email: args.userInput.email,
-          userName: args.userInput.userName,
-          password: hashedPassord,
-          createdDate: Date(),
-          updatedDate: Date()
-        })
-        return user
-          .save()
-          .then(result => {
-            return {
-              ...result._doc,
-              password: null,
-              _id: result.id,
-              email: result.email,
-              userName: result.userName,
-              photo: result.photo,
-              createdDate: result.createdDate,
-              updatedDate: result.updatedDate
-            }
-          })
-          .catch(err => {
-            throw err
-          })
-      })
-      .catch(err => {
-        throw err
-      })
+      }
+    } catch (error) {
+      return {
+        error: `${error.message}`,
+        data: null
+      }
+    }
+
+    const hashPassword = await bcrypt.hash(args.userInput.password, 12)
+
+    const user = new User({
+      email: args.userInput.email,
+      userName: args.userInput.userName,
+      password: hashPassword,
+      createdDate: Date(),
+      updatedDate: Date()
+    })
+
+    try {
+      const userResponse = await user.save()
+      return {
+        ...userResponse._doc,
+        password: null,
+        _id: userResponse.id,
+        email: userResponse.email,
+        userName: userResponse.userName,
+        photo: userResponse.photo,
+        createdDate: userResponse.createdDate,
+        updatedDate: userResponse.updatedDate
+      }
+    } catch (error) {
+      return {
+        error: `${error.message}`,
+        data: 'null'
+      }
+    }
   }
 }
