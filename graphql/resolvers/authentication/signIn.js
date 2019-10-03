@@ -25,6 +25,6 @@ export const signIn = {
       'somesupersecretkey',
       { expiresIn: '1h' }
     )
-    return { userId: user.id, token: token, tokenExpiration: 1, user: user }
+    return { userId: user.id, token: token, tokenExpiration: 1 }
   }
 }

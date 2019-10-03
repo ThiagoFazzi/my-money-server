@@ -23,7 +23,6 @@ export const user = `
     userId: String!
     token: String!
     tokenExpiration: Int!
-    user: User!
   }
 `;
 
