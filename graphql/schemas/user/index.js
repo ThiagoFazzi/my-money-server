@@ -8,6 +8,10 @@ export const user = `
     updatedDate: String
   }
 
+  input UserIdInput {
+    userId: String!
+  }
+
   input UserInput {
     email: String!
     password: String!
